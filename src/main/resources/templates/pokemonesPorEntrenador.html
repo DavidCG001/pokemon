@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon de {{entrenador.nombre}}</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <h1>Pokémon de <span th:text="${entrenador.nombre}"></span></h1>
+</header>
+
+<main>
+  <table>
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Habilidad</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pokemon : ${pokemones}">
+      <td th:text="${pokemon.nombre}"></td>
+      <td>
+        <span th:each="tipo : ${#strings.arraySplit(pokemon.tipo, '/')}">
+          <img th:src="@{'/icons/' + ${tipo.trim().toLowerCase()} + '.png'}"
+               th:alt="${tipo}" width="75" height="35">
+        </span>
+      </td>
+      <td th:text="${pokemon.habilidad}"></td>
+      <td>
+        <a th:href="@{/pokemones/editar/{id}(id=${pokemon.id})}">Editar</a> |
+        <a th:href="@{/pokemones/{id}(id=${pokemon.id})}">Eliminar</a> |
+        <a th:href="@{/pokemones/detalles/{id}(id=${pokemon.id})}">Ver Detalles</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/entrenadores">Volver a la lista de entrenadores</a>
+</main>
+</body>
+</html>

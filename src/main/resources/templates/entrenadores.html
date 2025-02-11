@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Entrenadores</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Lista de Entrenadores</h1>
+
+<nav>
+  <a href="/entrenadores/crear">Crear Entrenador</a> |
+  <a href="/pokemones/crear">Crear Pokémon</a> |
+  <a href="/pokemones">Ver Pokémon</a>
+</nav>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Iterar sobre los entrenadores -->
+  <tr th:each="entrenador : ${entrenadores}">
+    <td th:text="${entrenador.id}"></td>
+    <td th:text="${entrenador.nombre}"></td>
+    <td>
+      <a th:href="@{/entrenadores/editar/{id}(id=${entrenador.id})}">Editar</a> |
+      <a th:href="@{/entrenadores/{id}(id=${entrenador.id})}">Eliminar</a> |
+      <a th:href="@{/entrenadores/{id}/pokemones(id=${entrenador.id})}">Ver Pokémon</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

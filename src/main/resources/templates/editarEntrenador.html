@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Entrenador</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Editar Entrenador</h1>
+
+<nav>
+    <a href="/entrenadores">Lista de Entrenadores</a> |
+    <a href="/pokemones">Lista de Pokémon</a>
+</nav>
+
+<form th:action="@{/entrenadores/{id}(id=${entrenador.id})}" method="post" th:object="${entrenador}">
+    <input type="hidden" th:field="*{id}">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required>
+    <br>
+
+    <button type="submit">Actualizar</button>
+</form>
+</body>
+</html>

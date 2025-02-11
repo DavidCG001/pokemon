@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Pokémon</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Lista de Pokémon</h1>
+
+<nav>
+  <a href="/pokemones/crear">Crear Pokémon</a> |
+  <a href="/entrenadores/crear">Crear Entrenador</a> |
+  <a href="/entrenadores">Lista de Entrenadores</a>
+</nav>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Tipo</th>
+    <th>Nivel</th>
+    <th>Entrenador</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="pokemon : ${pokemones}">
+    <td th:text="${pokemon.id}"></td>
+    <td th:text="${pokemon.nombre}"></td>
+    <td>
+        <span th:each="tipo : ${#strings.arraySplit(pokemon.tipo, '/')}">
+          <img th:src="@{'/icons/' + ${tipo.trim().toLowerCase()} + '.png'}"
+               th:alt="${tipo}" width="75" height="35">
+        </span>
+    </td>
+    <td th:text="${pokemon.nivel}"></td>
+    <td th:text="${pokemon.entrenador.nombre}"></td>
+    <td>
+      <a th:href="@{/pokemones/detalles/{id}(id=${pokemon.id})}">Detalles</a>
+      <a th:href="@{/pokemones/editar/{id}(id=${pokemon.id})}">Editar</a>
+      <a th:href="@{/pokemones/{id}(id=${pokemon.id})}">Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

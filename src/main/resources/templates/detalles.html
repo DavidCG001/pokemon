@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Pokémon</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 50%;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: rgb(52, 152, 219);
+      color: #333;
+    }
+    td img {
+      vertical-align: middle;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff5733;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .back-button:hover {
+      background: #cc4627;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Detalles de <span th:text="${pokemon.nombre}"></span></h1>
+  <img th:src="@{'/icons/exeggutor-unscreen.gif'}" alt="Imagen de Exeggutor" width="75" height="135">
+</header>
+
+<main>
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <td th:text="${pokemon.nombre}"></td>
+    </tr>
+    <tr>
+      <th>Tipo</th>
+      <td>
+        <span th:each="tipo : ${#strings.arraySplit(pokemon.tipo, '/')}">
+          <img th:src="@{'/icons/' + ${tipo.trim().toLowerCase()} + '.png'}"
+               th:alt="${tipo}" width="75" height="35">
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th>Habilidad</th>
+      <td th:text="${pokemon.habilidad}"></td>
+    </tr>
+    <tr>
+      <th>Entrenador</th>
+      <td th:text="${pokemon.entrenador.nombre}"></td>
+    </tr>
+  </table>
+
+  <a href="/pokemones" class="back-button">Volver a la lista de Pokémon</a>
+</main>
+
+</body>
+</html>
