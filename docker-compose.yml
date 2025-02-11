@@ -10,12 +10,12 @@ services:
       db:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/pokemon_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dpg-culkmuhu0jms73bo5510-a:5432/pokemon_db
+      SPRING_DATASOURCE_USERNAME: root  # Ejemplo: pokemon_user
+      SPRING_DATASOURCE_PASSWORD: root  # Ejemplo: pokemon_pass
 
   db:
-    image: mysql:8.0
+    image: mysql:8.0  # Cambia esto si la base de datos es PostgreSQL
     container_name: mysql-container
     restart: always
     environment:
